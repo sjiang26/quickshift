@@ -1,6 +1,3 @@
----
-Sandy Jiang (sandraj) and Priscilla Tai (ptai)
-
 ## Summary
 We are going to implement image segmentation on a GPU using parallelized quick shift, a fast mode seeking algorithm.
 
