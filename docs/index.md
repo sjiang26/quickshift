@@ -1,8 +1,6 @@
 ---
-title: Document Center
+Image Segmentation on GPU
 ---
-
-# Image Segmentation on GPU
 Sandy Jiang (sandraj) and Priscilla Tai (ptai)
 
 ## Summary
@@ -14,7 +12,7 @@ Image segmentation is the process of dividing an image into multiple segments, i
 The main idea of quick shift is to move each point to the nearest neighbor that would lead to an increment of the density, and the calculations of the density follow from similar equations for mean shift or medoid shift. All the pixels and its connections with its neighbors form a tree, where the root of the tree is the point with the highest density estimate. Each connection between points has an associated distance, and the segmentation of the tree is calculated by removing all links in the tree that have a distance that’s greater than a chosen threshold. Each segment is formed by the pixels that are a part of each resulting disconnected tree.
 
 The following is pseudocode for quick shift image segmentation:
-'''
+```
 function computeDensity()
 for x in all pixels
   P[x] = 0
@@ -27,16 +25,16 @@ for x in all pixels
     if P[n] > P[x] and distance(x,n) is smallest among all n
       d[x] = distance(x,n)
       parent[x] = n
-'''
+```
 
 Quick shift image segmentation is prime for parallelization because density computations and neighbor calculations occur on each pixel of the image, and the computations don’t affect the pixels are distant from one another. This way, we can parallelize across pixels.
 
 ## Challenge
-The bottleneck on this algorithm is memory latency, since global memory on the GPU is slow. In the paper, they address this by using a texture cached approach of loading pixels. This will be tricky to implement.
+Implementing the sequential algorithm described in the paper in parallel will be challening. Additionally, the bottleneck on this algorithm is memory latency, since global memory on the GPU is slow. In the paper, they address this by using a texture cached approach of loading pixels. This will be tricky to implement.
 
 ## Resources
 We plan to start from the methods described in this paper:
-["Really quick shift: Image segmentation on a GPU", Brian Fulkerson and Stefano Soatto](http://www.vision.cs.ucla.edu/papers/fulkersonS10really.pdf)
+["Brian Fulkerson and Stefano Soatto, et. al Really quick shift: Image segmentation on a GPU"](http://www.vision.cs.ucla.edu/papers/fulkersonS10really.pdf).
 We will also be using NVIDIA GeForce GTX 1080 on the GHC machines.
 
 ## Goals and Deliverables
