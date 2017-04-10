@@ -1,3 +1,7 @@
+---
+title: Document Center
+---
+
 #Image Segmentation on GPU
 Sandy Jiang (sandraj) and Priscilla Tai (ptai)
 
