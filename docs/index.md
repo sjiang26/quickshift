@@ -46,11 +46,14 @@ In our demo, we plan to show the difference between the CPU implementation and o
 Similar to assignment 2, we will be writing in C++ and using CUDA to implement the parallelized quick shift algorithm on the GPU. We will be running the code on the NVIDIA GeForce GTX 1080 on the GHC machines. These computers would be useful for this implementation because its architecture allows us to test on multi-core machines that employs CUDA processing.
 
 ## Schedule
-| Date          | Task                                                    |
-| ------------- |:-------------------------------------------------------:|
-| April 12      | Finish researching and understanding the algorithm      |
-| April 15      | Have sequential implementation of quick shift algorithm |
-| April 25      | Have major CUDA kernels written                         |
-| April 29      | Finish CUDA implementation                              |
-| May 6         | Improvements and testing                                |
-| May 12        | Final Presentation                                      |
+April 12 - Finish researching and understanding the algorithm
+
+April 15 - Have sequential implementation of quick shift algorithm
+
+April 25 - Have major CUDA kernels written        
+
+April 29 - Finish CUDA implementation    
+
+May 6 - Improvements and testing   
+
+May 12 - Final Presentation                                     
