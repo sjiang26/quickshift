@@ -2,37 +2,60 @@
 title: Document Center
 ---
 
-#Image Segmentation on GPU
+# Image Segmentation on GPU
 Sandy Jiang (sandraj) and Priscilla Tai (ptai)
 
-##Summary
-Summarize your project in no more than 2-3 sentences. Describe what you plan to do and what parallel systems you will be working with. Example one-liners include (you should add a bit more detail):
+## Summary
+We are going to implement image segmentation on a GPU using parallelized quick shift, a fast mode seeking algorithm.
 
-We are going to implement an optimized Smoothed Particle Hydrodynamics fluid solver on the NVIDIA GPUs in the lab.
-We are going port the Go runtime to Blacklight.
-We are going to create optimized implementations of sparse-matrix multiplication on both GPU and multi-core CPU platforms, and perform a detailed analysis of both systems' performance characteristics.
-We are going to back-engineer the unpublished machine specifications of the GPU in the tablet my partner just purchased.
-We are going to implement two possible algorithms for a real-time computer vision application on a mobile device and measure their energy consumption in the lab.
+## Background
+Image segmentation is the process of dividing an image into multiple segments, in order to change the image into something easier to analyze. Segmentation algorithms have played a big role in computer vision research, and can be implemented using many different algorithms, some of which include thresholding, clustering, using minimum spanning trees, and quick shift. In this project, we will explore the implementations of quick shift for image segmentation and its optimizations using parallelization in CUDA and openMP. Quick shift is a kernelized version of a mode seeking algorithm which is similar conceptually to mean shift or medoid shift. 
 
-##Background
-If your project involves accelerating a compute-intensive application, describe the application or piece of the application you are going to implement in more detail. This description need only be a few paragraphs. It might be helpful to include a block diagram or pseudocode of the basic idea. An important detail is what aspects of the problem might benefit from parallelism? and why?
+The main idea of quick shift is to move each point to the nearest neighbor that would lead to an increment of the density, and the calculations of the density follow from similar equations for mean shift or medoid shift. All the pixels and its connections with its neighbors form a tree, where the root of the tree is the point with the highest density estimate. Each connection between points has an associated distance, and the segmentation of the tree is calculated by removing all links in the tree that have a distance that’s greater than a chosen threshold. Each segment is formed by the pixels that are a part of each resulting disconnected tree.
 
-##Challenge
-Describe why the problem is challenging. What aspects of the problem might make it difficult to parallelize? In other words, what to you hope to learn by doing the project?
+The following is pseudocode for quick shift image segmentation:
+'''
+function computeDensity()
+for x in all pixels
+  P[x] = 0
+  for n in all pixels less than 3*sigma away
+    P[x] += exp(-(f[x]-f[n])^2 / (2*sigma*sigma))
+    
+function linkNeighbors()
+for x in all pixels
+  for n in all pixels less than tau away
+    if P[n] > P[x] and distance(x,n) is smallest among all n
+      d[x] = distance(x,n)
+      parent[x] = n
+'''
 
-Describe the workload: what are the dependencies, what are its memory access characteristics? (is there locality? is there a high communication to computation ratio?), is there divergent execution?
-Describe constraints: What are the properties of the system that make mapping the workload to it challenging?
-RESOURCES. Describe the resources (type of computers, starter code, etc.) you will use. What code base will you start from? Are you starting from scratch or using an existing piece of code? Is there a book or paper that you are using as a reference (if so, provide a citation)? Are there any other resources you need, but haven't figured out how to obtain yet? Could you benefit from access to any special machines?
+Quick shift image segmentation is prime for parallelization because density computations and neighbor calculations occur on each pixel of the image, and the computations don’t affect the pixels are distant from one another. This way, we can parallelize across pixels.
 
-##Goals and Deliverables Describe the deliverables or goals of your project.
+## Challenge
+The bottleneck on this algorithm is memory latency, since global memory on the GPU is slow. In the paper, they address this by using a texture cached approach of loading pixels. This will be tricky to implement.
 
-This is by far the most important section of the proposal:
+## Resources
+We plan to start from the methods described in this paper:
+["Really quick shift: Image segmentation on a GPU", Brian Fulkerson and Stefano Soatto](http://www.vision.cs.ucla.edu/papers/fulkersonS10really.pdf)
+We will also be using NVIDIA GeForce GTX 1080 on the GHC machines.
 
-Separate your goals into what you PLAN TO ACHIEVE (what you believe you must get done to have a successful project and get the grade you expect) and an extra goal or two that you HOPE TO ACHIEVE if the project goes really well and you get ahead of schedule. It may not be possible to state precise performance goals at this time, but we encourage you be as precise as possible. If you do state a goal, give some justification of why you think you can achieve it. (e.g., I hope to speed up my starter code 10x, because if I did it would run in real-time.)
-If applicable, describe the demo you plan to show at the parallelism computation (will it be an interactive demo? will you show an output of the program that is really neat? will you show speedup graphs?). Specifically, what will you show us that will demonstrate you did a good job?
-If your project is an analysis project, what are you hoping to learn about the workload or system being studied? What question(s) do you plan to answer in your analysis?
-Systems project proposals should describe what the system will be capable of and what performance is hoped to be achieved.
-IN GENERAL: Imagine that I didn't give you a grading script on assignments 2, 3, or 4. Imagine you did the entire assignment, made it as fast as you could, and then turned it in. You wouldn't have any idea if you'd done a good job!!! That's the situation you are in for the final project. And that's the situation I'm in when grading your final project. As part of your project plan, and ONE OF THE FIRST THINGS YOU SHOULD DO WHEN YOU GET STARTED WORKING is implement the test harnesses and/or baseline "reference" implementations for your project. Then, for the rest of your project you always have the ability to run your optimized code and obtain a comparison.
-PLATFORM CHOICE. Describe why the platform (computer and/or language) you have chosen is a good one for your needs. Why does it make sense to use this parallel system for the workload you have chosen?
+## Goals and Deliverables
+#### Plan to achieve
+Implement the quick shift algorithm as described in the paper and obtain similar speedup (10-50x speedup on practical images) over the CPU implementation.
 
-##Schedule
+#### Hope to achieve
+Try to achieve higher speedup by approximating density via subsampling.
+
+#### Demo
+In our demo, we plan to show the difference between the CPU implementation and our implementation in regards to time, but the similarity in quality of segmentation.
+
+## Platform Choice
+Similar to assignment 2, we will be writing in C++ and using CUDA to implement the parallelized quick shift algorithm on the GPU. We will be running the code on the NVIDIA GeForce GTX 1080 on the GHC machines. These computers would be useful for this implementation because its architecture allows us to test on multi-core machines that employs CUDA processing.
+
+## Schedule
+April 12 - Finish researching and understanding the algorithm
+April 15 - Have sequential implementation of quick shift image segmentation
+April 25 (Checkpoint) - Have major CUDA kernels written
+April 29 - Finish CUDA implementation
+May 6 - Improvements and testing
+May 12 - Final Presentation
