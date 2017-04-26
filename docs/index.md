@@ -58,7 +58,7 @@ May 6 - Improvements and testing
 
 May 12 - Final Presentation    
 
-======
+---
 
 # Checkpoint
 
