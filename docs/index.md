@@ -64,9 +64,13 @@ May 12 - Final Presentation
 
 ## Updated Project Timeline
 Saturday April 29th - finish testing sequential implementation
+
 Tuesday May 2nd - finish implementing parallel implementation
+
 Saturday May 6th - start implementing density approximation
+
 Tuesday May 9th - finish implementing density approximation
+
 Friday May 12th - finish testing and writeup, project due
 
 ## Work Completed So Far
