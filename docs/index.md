@@ -31,22 +31,22 @@ To evaluate the results of our project, we implemented a checker that verified t
 To test our speedup, we ran our implementations with the PASCAL-2007 image dataset. We ran our baseline sequential implementation and compared it with our constant memory implementation and texture memory implementations. As seen in our graphs below, we ran tests using different σ, τ, and image dimensions. As mentioned previously, the parameter σ represents kernel size for the Parzen window estimator for density calculations and τ represents the maximum distance between two pixels considered when the algorithm builds the forest of segmented trees. We utilized a cycle timer to time our quickshift process function, which includes the density calculation and parents calculations.
 
 Image Examples:
-The following is the image on the left (original) segmented with σ = 2 and σ = 8. τ was held constant at 50, and the image size was constant at 512.
+Increasing σ results in a smoother density estimate. The following is the image on the left (original) segmented with σ = 2 and σ = 8. τ was held constant at 50, and the image size was constant at 512.
 
 ![Bird segmentation](images/bird_segmentations.jpg)
 
-The following is the image on the left (original) segmented with τ = 20 and τ = 80. σ was held constant at 2, and the image size was constant at 512.
-![Plant segmentation](images/plant_segmentation.jpg)
+Increasing τ increases the size of the region. The following is the image on the left (original) segmented with τ = 20 and τ = 80. σ was held constant at 2, and the image size was constant at 512.
 
+![Plant segmentation](images/plant_segmentation.jpg)
 The following graphs show speedup with respect to image size, σ, and τ. When timing the density and parent calculations, we obtained about 200x speedup compared to the CPU implementation. 
 
 Graphs:
 
-![Sigma graph](images/sigma_graph.jpg =200px)
+![Sigma graph](images/sigma_graph.jpg =200x)
 
-![Size graph](images/size_graph.png =200px)
+![Size graph](images/size_graph.png =200x)
 
-![Tau graph](images/tau_graph.jpg =200px)
+![Tau graph](images/tau_graph.jpg =200x)
 
 ---
 
