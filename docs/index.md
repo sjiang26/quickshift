@@ -32,20 +32,21 @@ To test our speedup, we ran our implementations with the PASCAL-2007 image datas
 
 Image Examples:
 The following is the image on the left (original) segmented with sigma = 2 and sigma = 8. Tau was held constant at 50, and the image size was constant at 512.
-![Bird segmentation](/sjiang26/418finalproject/bird_segmentations.jpg)
+
+![Bird segmentation](images/bird_segmentations.jpg)
 
 The following is the image on the left (original) segmented with tau = 20 and tau = 80. Sigma was held constant at 2, and the image size was constant at 512.
-![Plant segmentation](/sjiang26/418finalproject/plant_segmentation.jpg)
+![Plant segmentation](images/plant_segmentation.jpg)
 
 The following graphs show speedup with respect to image size, sigma, and tau. When timing the density and parent calculations, we obtained about 200x speedup compared to the CPU implementation. 
 
 Graphs:
 
-![Sigma graph](/sjiang26/418finalproject/sigma_graph.jpg)
+![Sigma graph](images/sigma_graph.jpg)
 
-![Size graph](/sjiang26/418finalproject/size_graph.png)
+![Size graph](images/size_graph.png)
 
-![Tau graph](/sjiang26/418finalproject/tau_graph.jpg)
+![Tau graph](images/tau_graph.jpg)
 
 ---
 
