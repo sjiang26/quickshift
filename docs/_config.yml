@@ -1,4 +1,6 @@
 theme: jekyll-theme-cayman
 title: Parallel GPU Image Segmentation
 description: 15-418 Final Project, by Sandy Jiang (sandraj) and Priscilla Tai (ptai)
-
+final: final
+checkpoint: checkpoint
+proposal: proposal
