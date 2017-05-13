@@ -5,7 +5,7 @@
 We parallelized QuickShift, an image segmentation algorithm, using CUDA on an Nvidia 1080 GTX.
 
 ## Background
-Image segmentation is the process of dividing an image into multiple segments, in order to change the image into something easier to analyze. Segmentation algorithms have played a big role in computer vision research, and can be implemented using many different algorithms, some of which include thresholding, clustering, using minimum spanning trees, and quick shift. In this project, we will explore the implementations of quick shift for image segmentation and its optimizations using parallelization in CUDA and openMP.
+Image segmentation is the process of dividing an image into multiple segments, in order to change the image into something easier to analyze. Segmentation algorithms have played a big role in computer vision research, and can be implemented using many different algorithms, some of which include thresholding, clustering, using minimum spanning trees, and quick shift. In this project, we will explore the implementations of quick shift for image segmentation and its optimizations using parallelization in CUDA.
 
 The main idea of quick shift is to move each point to the nearest neighbor that would lead to an increment of the density, where the density estimate is found using a Parzen window density estimate around each point. All the pixels and its connections with its neighbors form a tree, where the root of the tree is the point with the highest density estimate. Each connection between points has an associated distance, and the segmentation of the tree is calculated by removing all links in the tree that have a distance that’s greater than a chosen threshold. Each segment is formed by the pixels that are a part of each resulting disconnected tree.
 
@@ -48,3 +48,19 @@ The following graphs show speedup with respect to image size, σ, and τ. When t
 <img src="images/sigma_graph.jpg" alt="Sigma Graph" style="width: 550px;"/>
 
 <img src="images/tau_graph.jpg" alt="Tau Graph" style="width: 550px;"/>
+
+## References
+
+References:
+
+[1] A. Vedaldi and S. Soatto, “Quick shift and kernel methods for mode seeking,” in ECCV (4), pp. 705–718, 2008.
+
+[2] http://www.vlfeat.org/api/index.html
+
+[3] http://docs.nvidia.com/cuda/index.html#axzz4gswEaBxN
+
+[4] B. Fulkerson, S. Soatto, "Really Quick Shift: Image Segmentation on a GPU", Proc. Workshop Computer Vision Using GPUs held with the European Conf. Computer Vision, 2010-Sept.
+
+## List of Work
+
+Equal work was performed by both members.
