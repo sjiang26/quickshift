@@ -42,11 +42,11 @@ The following graphs show speedup with respect to image size, σ, and τ. When t
 
 Graphs:
 
-<img src="images/size_graph.png" alt="Size Graph" style="height: 50px;"/>
+<img src="images/size_graph.png" alt="Size Graph" style="height: 120px;"/>
 
-<img src="images/sigma_graph.jpg" alt="Sigma Graph" style="height: 50px;"/>
+<img src="images/sigma_graph.jpg" alt="Sigma Graph" style="height: 120px;"/>
 
-<img src="images/tau_graph.jpg" alt="Tau Graph" style="height: 50px;"/>
+<img src="images/tau_graph.jpg" alt="Tau Graph" style="height: 120px;"/>
 
 ---
 
