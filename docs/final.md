@@ -1,5 +1,5 @@
 
-# Final
+# Final Writeup
 
 ## Summary
 We parallelized QuickShift, an image segmentation algorithm, using CUDA on an Nvidia 1080 GTX.
@@ -21,32 +21,33 @@ Initial CUDA: After finishing our sequential implementation, we used CUDA to mov
 
 Optimizing CUDA: After starting with parallelizing on CUDA, we considered many different approaches and optimizations for our quickshift algorithm parallelization. We looked for opportunities in the algorithm to parallelize, but since we already placed the main two functions of calculating densities and parents into a kernel, there was not much room elsewhere to parallelize computation. Therefore, we looked to optimize in through data storage and accesses. To achieve lower memory access costs, we looked to utilize NVIDIA’s different kinds of memory options to reduce latency on global memory accesses.
 
-We first considered using shared memory, since each pixel accesses pixels around it when calculating its density and parents, so each block would use the same data. We placed both the pixels in the block, as well as the neighbors around the block, up to either sigma or tau. However, as the values of sigma and tau increase, the size of the shared memory would be increased by a quadratic factor, since each block accesses O(tau^2) or O(sigma^2) pixels around it. Therefore, the size of shared memory needed was not sufficiently large enough to be utilized.
+We first considered using shared memory, since each pixel accesses pixels around it when calculating its density and parents, so each block would use the same data. We placed both the pixels in the block, as well as the neighbors around the block, up to either σ or τ. However, as the values of σ and τ increase, the size of the shared memory would be increased by a quadratic factor, since each block accesses O(τ^2) or O(σ^2) pixels around it. Therefore, the size of shared memory needed was not sufficiently large enough to be utilized.
 
-We then researched the different types of memory available, and decided to implement the algorithm using texture memory. We mapped the image array into a 3D textue, and the density array into a 2D texture. Texture memory is especially good for algorithms with high 2D spacial locality, which our algorithm has since each pixel accesses a block of pixels around it.
+We then researched the different types of memory available, and decided to implement the algorithm using texture memory. We mapped the image array into a 3D texture, and the density array into a 2D texture. Texture memory is especially good for algorithms with high 2D spacial locality, which our algorithm has since each pixel accesses a block of pixels around it.
 
 ## Results
 To evaluate the results of our project, we implemented a checker that verified that each of the implementations are outputting the same results. To do this, we verify that the resulting parents for each pixel in the segmenting tree is the same for each implementation for any given picture and are therefore generating the same segmenting trees from the density and parent calculations.
 
 To test our speedup, we ran our implementations with the PASCAL-2007 image dataset. We ran our baseline sequential implementation and compared it with our constant memory implementation and texture memory implementations. As seen in our graphs below, we ran tests using different σ, τ, and image dimensions. As mentioned previously, the parameter σ represents kernel size for the Parzen window estimator for density calculations and τ represents the maximum distance between two pixels considered when the algorithm builds the forest of segmented trees. We utilized a cycle timer to time our quickshift process function, which includes the density calculation and parents calculations.
 
-Image Examples:
-The following is the image on the left (original) segmented with sigma = 2 and sigma = 8. Tau was held constant at 50, and the image size was constant at 512.
+### Image Examples:
+
+Increasing σ results in a smoother density estimate. The following is the image on the left (original) segmented with σ = 2 and σ = 8. τ was held constant at 50, and the image size was constant at 512.
 
 ![Bird segmentation](images/bird_segmentations.jpg)
 
-The following is the image on the left (original) segmented with tau = 20 and tau = 80. Sigma was held constant at 2, and the image size was constant at 512.
+Increasing τ increases the size of the region. The following is the image on the left (original) segmented with τ = 20 and τ = 80. σ was held constant at 2, and the image size was constant at 512.
+
 ![Plant segmentation](images/plant_segmentation.jpg)
+The following graphs show speedup with respect to image size, σ, and τ. When timing the density and parent calculations, we obtained about 200x speedup compared to the CPU implementation. 
 
-The following graphs show speedup with respect to image size, sigma, and tau. When timing the density and parent calculations, we obtained about 200x speedup compared to the CPU implementation. 
+### Graphs:
 
-Graphs:
+<img src="images/size_graph.png" alt="Size Graph" style="height: 340px;"/>
 
-![Sigma graph](images/sigma_graph.jpg)
+<img src="images/sigma_graph.jpg" alt="Sigma Graph" style="height: 340px;"/>
 
-![Size graph](images/size_graph.png)
-
-![Tau graph](images/tau_graph.jpg)
+<img src="images/tau_graph.jpg" alt="Tau Graph" style="height: 340px;"/>
 
 ---
 
