@@ -51,8 +51,6 @@ The following graphs show speedup with respect to image size, σ, and τ. When t
 
 ## References
 
-References:
-
 [1] A. Vedaldi and S. Soatto, “Quick shift and kernel methods for mode seeking,” in ECCV (4), pp. 705–718, 2008.
 
 [2] http://www.vlfeat.org/api/index.html
