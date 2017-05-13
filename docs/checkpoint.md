@@ -1,4 +1,4 @@
-﻿# Checkpoint
+# Checkpoint
 
 ## Updated Project Timeline
 Saturday April 29th - finish testing sequential implementation
