@@ -41,7 +41,7 @@ Increasing τ increases the size of the region. The following is the image on th
 ![Plant segmentation](images/plant_segmentation.jpg)
 The following graphs show speedup with respect to image size, σ, and τ. When timing the density and parent calculations, we obtained about 200x speedup compared to the CPU implementation. 
 
-Graphs:
+### Graphs:
 
 <img src="images/size_graph.png" alt="Size Graph" style="height: 340px;"/>
 
