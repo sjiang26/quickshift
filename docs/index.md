@@ -39,9 +39,10 @@ Increasing σ results in a smoother density estimate. The following is the image
 Increasing τ increases the size of the region. The following is the image on the left (original) segmented with τ = 20 and τ = 80. σ was held constant at 2, and the image size was constant at 512.
 
 ![Plant segmentation](images/plant_segmentation.jpg)
-The following graphs show speedup with respect to image size, σ, and τ. When timing the density and parent calculations, we obtained about 200x speedup compared to the CPU implementation. 
 
 ### Graphs:
+
+The following graphs show speedup with respect to image size, σ, and τ. When timing the density and parent calculations, we obtained about **200x speedup** compared to the CPU implementation. 
 
 <img src="images/size_graph.png" alt="Size Graph" style="width: 550px;"/>
 
