@@ -1,4 +1,4 @@
 theme: jekyll-theme-cayman
 title: quickshift
-description: Parallel GPU Image Segmentation, a project created by Sandy Jiang and Priscilla Tai for 15-418: Parallel Computer Architecture and Programming at Carnegie Mellon University.
+description: "Parallel GPU Image Segmentation, a project created by Sandy Jiang and Priscilla Tai for 15-418: Parallel Computer Architecture and Programming at Carnegie Mellon University."
 final: index
