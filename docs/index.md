@@ -1,8 +1,6 @@
 
-# Final Writeup
-
 ## Summary
-We parallelized QuickShift, an image segmentation algorithm, using CUDA on an Nvidia 1080 GTX.
+Parallelization of QuickShift, an image segmentation algorithm, using CUDA on an Nvidia 1080 GTX.
 
 ## Background
 Image segmentation is the process of dividing an image into multiple segments, in order to change the image into something easier to analyze. Segmentation algorithms have played a big role in computer vision research, and can be implemented using many different algorithms, some of which include thresholding, clustering, using minimum spanning trees, and quick shift. In this project, we will explore the implementations of quick shift for image segmentation and its optimizations using parallelization in CUDA.
@@ -59,7 +57,3 @@ The following graphs show speedup with respect to image size, σ, and τ. When t
 [3] http://docs.nvidia.com/cuda/index.html#axzz4gswEaBxN
 
 [4] B. Fulkerson, S. Soatto, "Really Quick Shift: Image Segmentation on a GPU", Proc. Workshop Computer Vision Using GPUs held with the European Conf. Computer Vision, 2010-Sept.
-
-## List of Work
-
-Equal work was performed by both members.
